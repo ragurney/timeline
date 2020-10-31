@@ -1,7 +1,7 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 
-import DateMark from '../';
+import DateMark from '..';
 
 describe('<DateMark />', () => {
   it('renders', () => {
