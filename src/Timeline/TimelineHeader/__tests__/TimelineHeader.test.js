@@ -6,6 +6,7 @@ import { Tooltip } from '@zendeskgarden/react-tooltips';
 import { ReactComponent as MaximizeIcon } from '@zendeskgarden/svg-icons/src/16/maximize-stroke.svg';
 import { ReactComponent as MinimizeIcon } from '@zendeskgarden/svg-icons/src/16/minimize-stroke.svg';
 import { ReactComponent as ResetIcon } from '@zendeskgarden/svg-icons/src/16/original-size-stroke.svg';
+import { ReactComponent as GearIcon } from '@zendeskgarden/svg-icons/src/16/gear-stroke.svg';
 
 import TimelineHeader from '../';
 
@@ -27,9 +28,9 @@ describe('<TimelineHeader />', () => {
     const wrapper = subject();
     const iconButtons = wrapper.find(IconButton);
 
-    expect(iconButtons).toHaveLength(3);
+    expect(iconButtons).toHaveLength(4);
 
-    const expectedIconButtonTypes = [MaximizeIcon, MinimizeIcon, ResetIcon];
+    const expectedIconButtonTypes = [MaximizeIcon, MinimizeIcon, ResetIcon, GearIcon];
     iconButtons.forEach((iconButton, index) => {
       expect(iconButton.find(expectedIconButtonTypes[index])).toHaveLength(1);
     });

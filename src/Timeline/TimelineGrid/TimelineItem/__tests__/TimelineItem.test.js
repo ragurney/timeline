@@ -1,9 +1,18 @@
 import React from 'react';
+import { useSelector } from 'react-redux';
 import { shallow } from 'enzyme';
 
 import TimelineItem from '../';
 
+jest.mock('react-redux', () => ({
+  useSelector: jest.fn().mockImplementation((selector) => selector()),
+}));
+
 describe('<TimelineItem />', () => {
+  beforeEach(() => {
+    useSelector.mockImplementation(() => 'vivid');
+  });
+
   const subject = (overrides = {}) => {
     const props = {
       gridDuration: 1,

@@ -1,8 +1,10 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useMemo } from 'react';
 import PropTypes from 'prop-types';
+import { useSelector } from 'react-redux';
 import styled, { css, keyframes } from 'styled-components';
 
-const COLORS = ['#1bbd22', '#35aef5', '#f41f52', '#f0a300'];
+import { COLOR_SCHEME_MAPPINGS } from '../../colors';
+import { selectSelectedColorScheme } from '../../selectors';
 
 const grow = keyframes`
   from {
@@ -29,7 +31,7 @@ const StyledTimelineItem = styled.div`
   z-index: 2;
   grid-column: ${({ start }) => start} / span ${({ gridDuration }) => gridDuration};
   grid-row: ${({ row }) => row};
-  background: ${({ backgroundColor }) => backgroundColor.current};
+  background: ${({ backgroundColor }) => backgroundColor};
   overflow: hidden;
   margin: 0.5rem 0;
   ${({ alreadyAnimated }) => !alreadyAnimated && animationMixin};
@@ -50,8 +52,17 @@ StyledTimelineItem.propTypes = {
 };
 
 const TimelineItem = React.memo(({ gridDuration, gridStart, name, row }) => {
+  const selectedColorScheme = useSelector(selectSelectedColorScheme);
+
   const alreadyAnimated = useRef(false);
-  const backgroundColor = useRef(COLORS[Math.floor(Math.random() * COLORS.length)]);
+
+  const backgroundColor = useMemo(
+    () =>
+      COLOR_SCHEME_MAPPINGS[selectedColorScheme][
+        Math.floor(Math.random() * COLOR_SCHEME_MAPPINGS[selectedColorScheme].length)
+      ],
+    [selectedColorScheme]
+  );
 
   useEffect(() => {
     alreadyAnimated.current = true;

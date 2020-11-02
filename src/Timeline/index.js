@@ -3,12 +3,18 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import dayjs from 'dayjs';
 import minMax from 'dayjs/plugin/minMax';
+import { createStore } from 'redux';
+import { Provider } from 'react-redux';
+
+import rootReducer from './reducers';
 
 import TimelineHeader from './TimelineHeader';
 import TimelineGrid from './TimelineGrid';
 import TimelineContainer from './TimelineContainer';
 
 dayjs.extend(minMax);
+
+const store = createStore(rootReducer);
 
 const StyledTimeline = styled.div`
   font-family: Mulish, sans-serif;
@@ -78,23 +84,27 @@ const Timeline = React.memo(({ data }) => {
   );
 
   return (
-    <StyledTimeline>
-      <TimelineContainer>
-        <TimelineHeader
-          setZoomMultiplier={setZoomMultiplier}
-          isAtZoomInLimit={endDate.subtract(1, 'week').diff(startDate.add(1, 'week'), 'weeks') <= 0}
-          isAtZoomOutLimit={
-            Math.max(minStartDate.diff(startDate, 'week'), maxEndDate.diff(endDate, 'week')) > 4
-          }
-        />
-        <TimelineGrid
-          weeks={weeks}
-          sortedDates={sortedDates}
-          startDate={startDate}
-          zoomMultiplier={zoomMultiplier}
-        />
-      </TimelineContainer>
-    </StyledTimeline>
+    <Provider store={store}>
+      <StyledTimeline>
+        <TimelineContainer>
+          <TimelineHeader
+            setZoomMultiplier={setZoomMultiplier}
+            isAtZoomInLimit={
+              endDate.subtract(1, 'week').diff(startDate.add(1, 'week'), 'weeks') <= 0
+            }
+            isAtZoomOutLimit={
+              Math.max(minStartDate.diff(startDate, 'week'), maxEndDate.diff(endDate, 'week')) > 4
+            }
+          />
+          <TimelineGrid
+            weeks={weeks}
+            sortedDates={sortedDates}
+            startDate={startDate}
+            zoomMultiplier={zoomMultiplier}
+          />
+        </TimelineContainer>
+      </StyledTimeline>
+    </Provider>
   );
 });
 Timeline.displayName = 'Timeline';
