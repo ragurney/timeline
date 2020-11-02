@@ -31,7 +31,7 @@ describe('<TimelineItem />', () => {
       expect(styledTimelineItem.prop('alreadyAnimated')).toBe(false);
       expect(styledTimelineItem.prop('gridDuration')).toBe(1);
       expect(styledTimelineItem.prop('start')).toBe(1);
-      expect(styledTimelineItem.prop('row')).toBe(-2);
+      expect(styledTimelineItem.prop('row')).toBe(2);
     });
   });
 

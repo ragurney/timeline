@@ -64,7 +64,7 @@ const TimelineItem = React.memo(({ gridDuration, gridStart, name, row }) => {
         backgroundColor={backgroundColor}
         gridDuration={gridDuration}
         start={gridStart}
-        row={-(row + 1)}
+        row={row + 1}
       >
         <StyledItemName>{name}</StyledItemName>
       </StyledTimelineItem>
