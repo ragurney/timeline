@@ -2,4 +2,4 @@
 
 A simple and tested timeline implementation
 
-![gif](http://recordit.co/YJ4nOdJj4I.gif)
+![demo](http://recordit.co/VNd0mteulx.gif)
