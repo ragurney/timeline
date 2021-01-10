@@ -4,4 +4,4 @@ A simple and tested timeline implementation
 
 [demo](http://recordit.co/VNd0mteulx)
 
-![demo](http://recordit.co/VNd0mteulx.gif)
+![demo](http://g.recordit.co/XkJA2Rbl33.gif)
